@@ -1,3 +1,79 @@
+### QLED-RLopt 
+
+- `README.md`  
+  项目整体介绍（中英），用例、结构、集成说明。
+- `requirements.txt`  
+  Python 依赖。
+- `qled_env/parameter_space.py`  
+  定义 QLED 结构编码与随机采样逻辑。
+- `qled_env/reward_function.py`  
+  物理驱动奖励函数（EQE、重叠度、惩罚项）。
+- `qled_env/simulator_interface.py`  
+  统一入口：Mock 物理、COMSOL CSV、代理模型三种评估模式。
+- `qled_env/comsol_parser.py`  
+  解析 COMSOL/TCAD 导出 CSV，计算 EQE proxy 与重叠度等。
+- `agent/dqn_agent.py`  
+  强化学习智能体占位实现（接口完整，可替换为真实 DQN/PPO）。
+- `surrogate_model/train_surrogate.py`  
+  从 `generated_designs.csv` 等数据训练 MLP 代理模型。
+- `surrogate_model/predict_performance.py`  
+  加载代理模型，对输入设计输出 EQE/overlap/penalty 预测。
+- `data/generated_designs.csv`  
+  示例/占位数据，用于测试与可视化。
+- `data/simulated_results/`  
+  存放真实或合成仿真结果 CSV。
+- `scripts/run_optimization.py`  
+  运行 RL 优化全流程（可选 surrogate/comsol）。
+- `scripts/simulate_design.py`  
+  预留：单一设计评估脚本（可用于调试）。
+- `notebooks/01_explore_parameter_space.ipynb`  
+  探索参数空间、载入 CSV。
+- `notebooks/02_visualize_rl_results.ipynb`  
+  可视化 EQE–结构关系和 RL 日志。
+- `tests/test_reward_logic.py`  
+  检查奖励函数合理性。
+- `tests/test_simulator_interface.py`  
+  检查模拟接口可正常返回指标。
+- `LICENSE`  
+  开源协议（推荐 MIT）。
+
+### QDLED-3DSim 
+
+- `README.md`  
+  项目整体介绍（中英），定位为 3D 仿真 + 分析工具。
+- `requirements.txt`  
+  Python 依赖。
+- `config/default_materials.yaml`  
+  示例材料参数（可扩展为真实数据）。
+- `simulator/comsol_parser.py`  
+  仿真结果解析（与 QLED-RLopt 可共享理念/实现）。
+- `simulator/geometry_builder.py`  
+  用于描述/生成器件几何布局（层厚、平面图案参数）。
+- `simulator/mesh_configurator.py`  
+  网格、边界条件等配置占位。
+- `ai_model/featurize_geometry.py`  
+  将 2D/3D 结构 + 材料信息转为特征向量 / 图结构。
+- `ai_model/train_model.py`  
+  基于仿真数据训练代理模型（如 3D CNN / GNN）。
+- `ai_model/evaluate_model.py`  
+  评价模型预测 EQE/复合分布的误差与鲁棒性。
+- `data/raw_simulations/`  
+  存放原始仿真导出数据。
+- `data/preprocessed/`  
+  存放特征化后的训练数据。
+- `visualization/render_3d_carriers.py`  
+  生成载流子/复合的 3D/切片图。
+- `scripts/run_full_simulation.py`  
+  示例脚本：读配置 → 解析仿真 → 输出指标。
+- `notebooks/01_inspect_simulation_data.ipynb`  
+  浏览单个结构的三维分布。
+- `notebooks/02_compare_structures.ipynb`  
+  对比不同结构的性能指标。
+- `LICENSE`  
+  开源协议（推荐 MIT，与 QLED-RLopt 兼容）。
+
+---
+
 ## Project 1: QLED-RLopt
 # Reinforcement Learning for Optimizing Layered and Microstructured QLED Architectures
 
