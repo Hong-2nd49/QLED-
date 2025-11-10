@@ -155,4 +155,4 @@ python scripts/run_full_simulation.py --config config/default_materials.yaml
 - `notebooks/`：结果比对与数据浏览示例
 
 ---
-Let me know if you'd like a COMSOL example input file, or a surrogate model prototype in PyTorch.
+
